@@ -2,6 +2,11 @@
 <robot xmlns:xacro="https://www.ros.org/wiki/xacro" name="robot">
     <xacro:include filename="$(find inverted_pendulum)/urdf/inverted_pendulum.urdf"/>
 
+    <!-- Gazebo Cosim -->
+    <gazebo>
+        <plugin name="GazeboPlugin" filename="lib/libGazeboCoSimPlugin.so"><portNumber>14581</portNumber></plugin>
+    </gazebo>
+
     <!-- Wheel Stuff -->
     <transmission name="trans_left_wheel">
         <type>transmission_interface/SimpleTransmission</type>
@@ -30,7 +35,7 @@
     </gazebo>
 
     <!-- IMU Sensor -->
-    <gazebo>
+    <!-- <gazebo>
     <plugin name="imu_plugin" filename="libgazebo_ros_imu.so">
       <alwaysOn>true</alwaysOn>
       <bodyName>imu_link</bodyName>
@@ -39,5 +44,25 @@
       <gaussianNoise>0.0</gaussianNoise>
       <updateRate>20.0</updateRate>
     </plugin>
-  </gazebo>
+  </gazebo> -->
+
+    <sensor name="imu_sensor" type="imu">
+        <update_rate>50</update_rate>
+        <topic>/imu/data</topic>
+        <imu>
+            <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.001</stddev>
+            </noise>
+        </imu>
+    </sensor>
+    <gazebo>
+        <plugin name="imu_plugin" filename="libgazebo_ros_imu.so">
+            <update_rate>50</update_rate>
+            <topicName>/imu/data</topicName>
+            <frameName>imu_link</frameName>
+            <bodyName>imu_link</bodyName>
+        </plugin>
+    </gazebo>
 </robot>
