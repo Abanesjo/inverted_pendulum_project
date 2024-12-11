@@ -1,6 +1,6 @@
 # inverted_pendulum_project
 
-This is a quick simulation on Gazebo of the inverted pendulum cart created for the Controls Systems Laboratory course.
+This is a quick simulation on Gazebo of the inverted pendulum cart created for the Controls Systems Laboratory course. It's still open-loop, because we ran out of time to control it sadly. But it at least simulates the IMU for now.
 
 ## Usage
 ```
